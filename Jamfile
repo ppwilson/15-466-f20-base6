@@ -50,6 +50,7 @@ if $(OS) = NT { #Windows
 		-I$(NEST_LIBS)/libogg/include                                               #libogg
 		-I$(NEST_LIBS)/freetype/include                                             #freetype
 		-I$(NEST_LIBS)/harfbuzz/include                                             #harfbuzz
+		-Ireactphysics3d/include
 		;
 	LINK = clang++ ;
 	LINKFLAGS = -std=c++17 -g -Wall -Werror ;
@@ -62,6 +63,7 @@ if $(OS) = NT { #Windows
 		-L$(NEST_LIBS)/libogg/lib -logg                                             #libogg (for opusfile)
 		-L$(NEST_LIBS)/harfbuzz/lib -lharfbuzz                                      #harfbuzz
 		-L$(NEST_LIBS)/freetype/lib -lfreetype                                      #freetype
+		-Lreactphysics3d -lreactphysics3d
 		;
 	File README-SDL.txt : $(NEST_LIBS)/SDL2/dist/README-SDL.txt ;
 	MakeLocate README-SDL.txt : dist ;
@@ -78,6 +80,7 @@ if $(OS) = NT { #Windows
 		-I$(NEST_LIBS)/libogg/include                                               #libogg
 		-I$(NEST_LIBS)/freetype/include                                             #freetype
 		-I$(NEST_LIBS)/harfbuzz/include                                             #harfbuzz
+		-Ireactphysics3d/include
 		;
 	LINK = g++ -no-pie ;
 	LINKFLAGS = -std=c++17 -g -Wall -Werror ;
@@ -90,6 +93,7 @@ if $(OS) = NT { #Windows
 		-L$(NEST_LIBS)/libogg/lib -logg                                                       #libogg (for opusfile)
 		-L$(NEST_LIBS)/harfbuzz/lib -lharfbuzz                                                #harfbuzz
 		-L$(NEST_LIBS)/freetype/lib -lfreetype                                                #freetype
+		-Lreactphysics3d -lreactphysics3d
 		;
 	#`PATH=$(KIT_LIBS)/SDL2/bin:$PATH sdl2-config --static-libs` -lGL #SDL2 (old way that allows system libs to also work)
 	File README-SDL.txt : $(NEST_LIBS)/SDL2/dist/README-SDL.txt ;
@@ -146,7 +150,7 @@ SHOW_SCENE_NAMES =
 
 
 LOCATE_TARGET = objs ; #put objects in 'objs' directory
-Objects 
+Objects
 	$(CLIENT_NAMES:S=.cpp)
 	$(SERVER_NAMES:S=.cpp)
 	$(COMMON_NAMES:S=.cpp)
